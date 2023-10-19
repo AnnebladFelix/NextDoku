@@ -1,10 +1,11 @@
 import React from 'react'
-import {Button} from '@radix-ui/themes'
+import { Button } from '@radix-ui/themes'
+import Link from 'next/link'
 
 export default function issuesPage() {
   return (
-    <>
-        <Button> New issue </Button>
-    </>
+    <div>
+        <Button><Link href='/issues/new'> Add Issue </Link></Button>
+    </div>
   )
 }
