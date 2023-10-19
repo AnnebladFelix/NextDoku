@@ -10,7 +10,7 @@ import { createIssueSchema } from "@/app/validationSchemas";
 import {z} from 'zod';
 import SimpleMDE from "react-simplemde-editor";
 import axios from 'axios';
-import ErrorMessage from "@/app/components/errorMessage";
+import ErrorMessage from "@/app/components/ErrorMessage";
 
 type IssueForm =  z.infer<typeof createIssueSchema>
 
