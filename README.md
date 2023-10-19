@@ -37,6 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - Next.js 13
 - Tailwind
+- radix-ui
 - classnames
 - react-icons
 - Prisma
