@@ -8,7 +8,7 @@ export default function Logo() {
         <Image
         src="/images/nextdoku-logo-black.png"
         width={150}
-        height={200}
+        height={0}
         alt='NextDoku Logo'
         priority={true}
         />
