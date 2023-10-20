@@ -8,14 +8,16 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { createIssueSchema } from "@/app/validationSchemas";
 import {z} from 'zod';
-import SimpleMDE from "react-simplemde-editor";
+import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
 import ErrorMessage from "@/app/components/ErrorMessage";
 import { Spinner } from "@/app/components/Spinner";
 
 type IssueForm =  z.infer<typeof createIssueSchema>
+    
 
 const NewIssuePage = () => {
+    const apiKey = process.env.tinyKey;
     const router = useRouter();
     const {register, control, handleSubmit, formState: {errors}} = useForm<IssueForm>({
         resolver: zodResolver(createIssueSchema)
@@ -24,7 +26,7 @@ const NewIssuePage = () => {
     const [loading, setLoading] = useState(false)
 
     return (
-    <div className='max-w-xl space-y-4 '>
+    <div className=' space-y-4 '>
         {error && <Callout.Root color='red' className=' mb-5 '>
             <Callout.Text>{error}</Callout.Text>
             </Callout.Root>}
@@ -49,7 +51,7 @@ const NewIssuePage = () => {
             <Controller 
             name='description'
             control={control}
-            render={({ field }) => <SimpleMDE className=' mt-5 ' placeholder="Add your content" {...field} />}
+            render={({ field }) => <Editor apiKey={apiKey} {...field} />}
             />
             <ErrorMessage>
                 {errors.description?.message}

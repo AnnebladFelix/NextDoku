@@ -6,6 +6,7 @@ export default function issuesPage() {
   return (
     <div>
         <Button><Link href='/issues/new'> Add Issue </Link></Button>
+        <Button><Link href='/issues/posts'> See Issues </Link></Button>
     </div>
   )
 }
