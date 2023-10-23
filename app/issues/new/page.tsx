@@ -5,62 +5,77 @@ import { Button, TextField, Callout, Text } from '@radix-ui/themes'
 import {useForm, Controller, set} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { createIssueSchema } from "@/app/validationSchemas";
 import {z} from 'zod';
-import { Editor } from '@tinymce/tinymce-react';
+import { Editor as TinyMCEEditor} from '@tinymce/tinymce-react';
 import axios from 'axios';
 import ErrorMessage from "@/app/components/ErrorMessage";
 import { Spinner } from "@/app/components/Spinner";
 
-type IssueForm =  z.infer<typeof createIssueSchema>
-    
+type IssueForm = z.infer<typeof createIssueSchema>;
 
 const NewIssuePage = () => {
-    const apiKey = process.env.tinyKey;
-    const router = useRouter();
-    const {register, control, handleSubmit, formState: {errors}} = useForm<IssueForm>({
-        resolver: zodResolver(createIssueSchema)
-    });
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
+  const apiKey = process.env.tinyKey;
+  const router = useRouter();
+  const { control, register, handleSubmit, formState: { errors } } = useForm<IssueForm>({
+    resolver: zodResolver(createIssueSchema),
+  });
+  const [editorContent, setEditorContent] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-    return (
-    <div className=' space-y-4 '>
-        {error && <Callout.Root color='red' className=' mb-5 '>
-            <Callout.Text>{error}</Callout.Text>
-            </Callout.Root>}
-        <form 
-        onSubmit={handleSubmit(async (data) => { 
-            try {
-            setLoading(true);
-            await axios.post('/api/issues', data)
-            router.push('/issues')
-            } catch (error) {
-                setLoading(false);
-                setError('An unexpected error.')
-            }
-                
-        })}>
-            <TextField.Root className=' mt-5 ' >
-                <TextField.Input placeholder='Title' {...register('title')} />
-            </TextField.Root>
-            <ErrorMessage>
-                {errors.title?.message}
-            </ErrorMessage>
-            <Controller 
-            name='description'
-            control={control}
-            render={({ field }) => <Editor apiKey={apiKey} {...field} />}
+  const handleEditorChange = (content: string) => {
+    setEditorContent(content);
+  };
+
+  const onSubmit = async (data: IssueForm) => {
+    try {
+      setLoading(true);
+      const requestData = { ...data, description: editorContent };
+      await axios.post('/api/issues', requestData);
+      router.push('/issues');
+    } catch (error) {
+      setLoading(false);
+      setError('An unexpected error occurred.');
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      {error && (
+        <Callout.Root color="red" className="mb-5">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField.Root className="mt-5">
+          <TextField.Input placeholder="Title" {...register('title')} />
+        </TextField.Root>
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <Controller
+        name="description"
+        control={control}
+        defaultValue={editorContent}
+        render={({ field }) => (
+            <TinyMCEEditor
+            id="FIXED_ID"
+            apiKey={apiKey}
+            value={field.value}
+            onEditorChange={(content) => {
+                field.onChange(content);
+                handleEditorChange(content);
+            }}
             />
-            <ErrorMessage>
-                {errors.description?.message}
-            </ErrorMessage>
-            <Button disabled={!setLoading} >
-                 ADD {loading && <Spinner />} 
-            </Button>
-        </form>
+        )}
+        />
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
+        <Button disabled={loading}>
+          ADD {loading && <Spinner />}
+        </Button>
+      </form>
     </div>
-  )
-}
-export default NewIssuePage
+  );
+};
+
+export default NewIssuePage;
