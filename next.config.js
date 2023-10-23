@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    env: {
+        tinyKey: process.env.TINY_KEY,
+      },
+}
 
 module.exports = nextConfig
