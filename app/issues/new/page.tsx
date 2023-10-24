@@ -1,11 +1,11 @@
 'use client';
 
 import "easymde/dist/easymde.min.css";
-import { Button, TextField, Callout, Text } from '@radix-ui/themes'
-import {useForm, Controller, set} from 'react-hook-form'
+import { Button, TextField, Callout } from '@radix-ui/themes'
+import {useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { createIssueSchema } from "@/app/validationSchemas";
 import {z} from 'zod';
 import { Editor as TinyMCEEditor} from '@tinymce/tinymce-react';
@@ -65,10 +65,8 @@ const NewIssuePage = () => {
             onEditorChange={(content) => {
                 field.onChange(content);
                 handleEditorChange(content);
-            }}
-            />
-        )}
-        />
+            }}/>
+        )}/>
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={loading}>
           ADD {loading && <Spinner />}
