@@ -7,6 +7,7 @@ import {z} from 'zod';
 import { getIssueSchema } from '@/app/validationSchemas';
 import { Callout } from '@radix-ui/themes'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 type Issue =  z.infer<typeof getIssueSchema>
@@ -15,6 +16,9 @@ const GetIssuePage = () => {
     const [issues, setIssues] = useState<Issue[]>([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
+
 
     useEffect(() => {
         const fetchIssues = async () => {
@@ -30,6 +34,10 @@ const GetIssuePage = () => {
 
         fetchIssues();
     }, []); 
+
+    const handleEdit = (issue: Issue) =>{
+        router.push(`/issues/posts/edit/?id=`+ issue.id)
+    }
 
     if (loading) {
         return <Spinner />; 
@@ -47,7 +55,9 @@ const GetIssuePage = () => {
         <div className='space-y-4'>
             {issues.map((issue) => (
                 <div key={issue.id}>
-                    <Link href={`/issues/posts/`+issue.id}> {issue.title} </Link>
+                    {/* <Link  href={`/issues/posts/`+issue.id}> {issue.title} </Link> */}
+                    <button onClick={(e) => handleEdit(issue)}  > {issue.title} </button>
+                    <p>{issue.description}</p>
                 </div>
             ))}
         </div>
