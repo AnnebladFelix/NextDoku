@@ -38,6 +38,11 @@ const GetIssuePage = () => {
         router.push(`/issues/posts/edit/?id=`+ issue.id)
     }
 
+    const handleDelete = async (issue: Issue) =>{
+        const res = await fetch(`/api/issues/`+ issue.id)
+        method: "DELETE"
+    }
+
     if (loading) {
         return <Spinner />; 
     }
@@ -58,8 +63,10 @@ const GetIssuePage = () => {
                     <div key={issue.id}>
                         <button 
                         className='text-2xl font-bold' 
-                        onClick={(e) => handleEdit(issue)}>
-                            {issue.title}</button>
+                        onClick={(e) => handleEdit(issue)}> 
+                        {issue.title}
+                        </button>
+                        <button onClick={(e) => handleDelete(issue)}> Delete </button>
                     </div>
                 ))}
             </div>
