@@ -19,7 +19,9 @@ export async function GET(request: NextRequest) {
     try {
         const issues = await prisma.issue.findMany();
         return NextResponse.json(issues, { status: 200 });
+
     } catch (error) {
         return NextResponse.json({ error: "Error fetching issues" }, { status: 500 });
     }
 }
+

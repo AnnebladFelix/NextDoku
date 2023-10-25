@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Theme accentColor="gold" panelBackground="solid">
+        <Theme accentColor="gold" panelBackground="solid" radius="large">
           <Navbar />
           <main className='p-5'>{children}</main>
           {/* Panel där man kan ändra tema */}

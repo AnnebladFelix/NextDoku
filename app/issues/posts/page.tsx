@@ -4,37 +4,42 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Spinner } from '@/app/components/Spinner';
 import {z} from 'zod';
-import { createIssueSchema } from '@/app/validationSchemas';
+import { getIssueSchema } from '@/app/validationSchemas';
 import { Callout } from '@radix-ui/themes'
+import { useRouter } from 'next/navigation';
+import { Button } from '@radix-ui/themes'
+import Link from 'next/link'
 
 
-type Issue =  z.infer<typeof createIssueSchema>
+type Issue =  z.infer<typeof getIssueSchema>
 
 const GetIssuePage = () => {
     const [issues, setIssues] = useState<Issue[]>([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
+
 
     useEffect(() => {
         const fetchIssues = async () => {
             try {
                 const response = await axios.get('/api/issues');
-                setIssues(response.data); // Assuming the response contains the list of issues
+                setIssues(response.data);
                 setLoading(false);
-                console.log(response.data);
-                
-                
             } catch (error) {
                 setError('Error fetching issues. Please try again later.');
                 setLoading(false);
             }
-        };
+        }; fetchIssues();
+    }, []); 
 
-        fetchIssues();
-    }, []); // Empty dependency array ensures the effect runs once after the initial render
+    const handleEdit = (issue: Issue) =>{
+        router.push(`/issues/posts/edit/?id=`+ issue.id)
+    }
 
     if (loading) {
-        return <Spinner />; // Display a loading spinner while fetching data
+        return <Spinner />; 
     }
 
     if (error) {
@@ -45,15 +50,19 @@ const GetIssuePage = () => {
         );
     }
 
-    // Render your fetched issues here, for example:
     return (
-        <div className='space-y-4'>
-            {issues.map((issue) => (
-                <div key={issue.title}>
-                    <p>{issue.title}</p>
-                    {/* Render individual issue components */}
-                </div>
-            ))}
+        <div>
+            <Button><Link href='/issues'> Back </Link></Button>
+            <div className='space-y-4'>
+                {issues.map((issue) => (
+                    <div key={issue.id}>
+                        <button 
+                        className='text-2xl font-bold' 
+                        onClick={(e) => handleEdit(issue)}>
+                            {issue.title}</button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
