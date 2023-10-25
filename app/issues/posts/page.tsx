@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Spinner } from '@/app/components/Spinner';
 import {z} from 'zod';
 import { getIssueSchema } from '@/app/validationSchemas';
 import { Callout } from '@radix-ui/themes'
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Button } from '@radix-ui/themes'
+import Link from 'next/link'
 
 
 type Issue =  z.infer<typeof getIssueSchema>
@@ -30,9 +31,7 @@ const GetIssuePage = () => {
                 setError('Error fetching issues. Please try again later.');
                 setLoading(false);
             }
-        };
-
-        fetchIssues();
+        }; fetchIssues();
     }, []); 
 
     const handleEdit = (issue: Issue) =>{
@@ -52,14 +51,18 @@ const GetIssuePage = () => {
     }
 
     return (
-        <div className='space-y-4'>
-            {issues.map((issue) => (
-                <div key={issue.id}>
-                    {/* <Link  href={`/issues/posts/`+issue.id}> {issue.title} </Link> */}
-                    <button onClick={(e) => handleEdit(issue)}  > {issue.title} </button>
-                    <p>{issue.description}</p>
-                </div>
-            ))}
+        <div>
+            <Button><Link href='/issues'> Back </Link></Button>
+            <div className='space-y-4'>
+                {issues.map((issue) => (
+                    <div key={issue.id}>
+                        <button 
+                        className='text-2xl font-bold' 
+                        onClick={(e) => handleEdit(issue)}>
+                            {issue.title}</button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

@@ -12,6 +12,7 @@ import { Editor as TinyMCEEditor} from '@tinymce/tinymce-react';
 import axios from 'axios';
 import ErrorMessage from "@/app/components/ErrorMessage";
 import { Spinner } from "@/app/components/Spinner";
+import Link from "next/link";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -42,36 +43,39 @@ const NewIssuePage = () => {
   };
 
   return (
-    <div className="space-y-4">
-      {error && (
-        <Callout.Root color="red" className="mb-5">
-          <Callout.Text>{error}</Callout.Text>
-        </Callout.Root>
-      )}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField.Root className="mt-5">
-          <TextField.Input placeholder="Title" {...register('title')} />
-        </TextField.Root>
-        <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <Controller
-        name="description"
-        control={control}
-        defaultValue={editorContent}
-        render={({ field }) => (
-            <TinyMCEEditor
-            id="FIXED_ID"
-            apiKey={apiKey}
-            value={field.value}
-            onEditorChange={(content) => {
-                field.onChange(content);
-                handleEditorChange(content);
-            }}/>
-        )}/>
-        <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button disabled={loading}>
-          ADD {loading && <Spinner />}
-        </Button>
-      </form>
+    <div>
+      <Button><Link href='/issues'> Back </Link></Button>
+      <div className="space-y-4">
+        {error && (
+          <Callout.Root color="red" className="mb-5">
+            <Callout.Text>{error}</Callout.Text>
+          </Callout.Root>
+        )}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField.Root className="mt-5">
+            <TextField.Input placeholder="Title" {...register('title')} />
+          </TextField.Root>
+          <ErrorMessage>{errors.title?.message}</ErrorMessage>
+          <Controller
+          name="description"
+          control={control}
+          defaultValue={editorContent}
+          render={({ field }) => (
+              <TinyMCEEditor
+              id="FIXED_ID"
+              apiKey={apiKey}
+              value={field.value}
+              onEditorChange={(content) => {
+                  field.onChange(content);
+                  handleEditorChange(content);
+              }}/>
+          )}/>
+          <ErrorMessage>{errors.description?.message}</ErrorMessage>
+          <Button disabled={loading}>
+            ADD {loading && <Spinner />}
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
