@@ -27,6 +27,11 @@ Install dependencies
   pnpm install
 ```
 
+### Add .env
+
+Add .env file to the root folder
+Contact [@AnnebladFelix](https://github.com/AnnebladFelix) for keys to add into your .env file.
+
 Start the server 
 
 ```bash
