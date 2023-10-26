@@ -10,7 +10,7 @@ export default function issuesPage() {
       </div>
       <div>
           <Button mr="3"><Link href='/issues/new'> Add document </Link></Button>
-          <Button><Link href='/issues/posts'> Edit document </Link></Button>
+          <Button><Link href='/issues/posts'> Edit documents </Link></Button>
       </div>
     </div>
   )
