@@ -1,6 +1,7 @@
 # NextDoku
 
-A school project for creating documents using nextjs 13 and prisma with mySQL. 
+A school project for creating documents using the WYSIWYG editor Tiny. 
+Created using nextjs 13 and prisma with mySQL.
 
 ## Run Locally
 
@@ -40,7 +41,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## dependencies
+## Dependencies
 
 - Next.js 13
 - Tailwind
