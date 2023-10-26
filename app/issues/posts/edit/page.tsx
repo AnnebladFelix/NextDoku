@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import Link from 'next/link';
 
 type Issue =  z.infer<typeof createIssueSchema>
 
@@ -77,10 +78,11 @@ const GetOneIssuePage = () => {
     }
     
     return (
-        <div className='space-y-4'>
-            <div key={issue.title}>
+        <div className='flex justify-center'>
+            <div key={issue.title} className='max-w-6xl w-full '>
+                <Button ><Link href='/issues/posts/'> Back </Link></Button>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <TextField.Root className="mt-5">
+                    <TextField.Root className="mt-3">
                         <TextField.Input defaultValue={issue.title} {...register('title')} />
                     </TextField.Root>
                     <ErrorMessage>{errors.title?.message}</ErrorMessage>
@@ -99,14 +101,18 @@ const GetOneIssuePage = () => {
                             handleEditorChange(content);
                         }}
                         init={{
+                            height: 600,
                             plugins: " preview mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
-                                toolbar: "preview undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat"
+                            toolbar: "preview undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat"
                         }}/>
                     )}/>
                     <ErrorMessage>{errors.description?.message}</ErrorMessage>
-                    <Button disabled={loading}>
-                        ADD {loading && <Spinner />}
-                    </Button>
+                    <div className='mt-3'>
+                        <Button mr="3" disabled={loading}>
+                            ADD {loading && <Spinner />}
+                        </Button>
+                        <Button ><Link href='/issues/posts/'> Cancel </Link></Button>
+                    </div>
                 </form>
             </div>
         </div>

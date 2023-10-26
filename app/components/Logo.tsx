@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Logo() {
   return (
-    <section className='w-full mx-auto ' >
+    <section >
       <Link href='/'>
         <Image
         src="/images/nextdoku-logo-black.png"

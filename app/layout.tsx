@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={inter.variable}>
         <Theme accentColor="gold" panelBackground="solid" radius="large">
           <Navbar />
-          <main className='p-5'>{children}</main>
+          <main className='p-5 flex justify-center'>{children}</main>
           {/* Panel där man kan ändra tema */}
           {/* <ThemePanel></ThemePanel> */}
         </Theme>
