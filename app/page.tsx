@@ -1,15 +1,15 @@
-import Image from 'next/image'
+import Link from "next/link";
+import DisplayDocument from "./DisplayDocument";
+import {Button} from '@radix-ui/themes'
 
 export default function Home() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <Image src="/images/logo.png" alt="logo" width={200} height={200} />
-      <h2>Welcome to Next.js!</h2>
-      <p>This is a sample Next.js project.</p>
-      <p>
-        <a href="https://nextjs.org/docs">Learn more about Next.js</a>
-      </p>
+      <h1>Welcome to NextDoku.</h1>
+      <p>This is a Next.js project to create documents.</p>
+      
+      <Button><Link href='/issues'> Edit and Add document </Link></Button>
+      <DisplayDocument />
     </div>
   )
 }

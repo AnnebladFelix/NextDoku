@@ -19,19 +19,15 @@ const GetOneIssuePage = () => {
     const [issue, setIssue] = useState<Issue | null>(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const [editorContent, setEditorContent] = useState('');
     const searchParams = useSearchParams()
     const id = searchParams.get('id')
     const router = useRouter();
+    const [editorContent, setEditorContent] = useState('');
     const { control, register, handleSubmit, formState: { errors } } = useForm<Issue>({
-        resolver: zodResolver(createIssueSchema),
-    });
+        resolver: zodResolver(createIssueSchema), });
     const handleEditorChange = (content: string) => {
     setEditorContent(content);
     };
-    console.log();
-    
-    
     
     useEffect(() => {
         const fetchIssue = async () => {
@@ -85,7 +81,7 @@ const GetOneIssuePage = () => {
             <div key={issue.title}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField.Root className="mt-5">
-                        <TextField.Input value={issue.title} placeholder={issue.title} {...register('title')} />
+                        <TextField.Input defaultValue={issue.title} {...register('title')} />
                     </TextField.Root>
                     <ErrorMessage>{errors.title?.message}</ErrorMessage>
                     <Controller
