@@ -80,7 +80,10 @@ const GetOneIssuePage = () => {
     return (
         <div className='flex justify-center'>
             <div key={issue.title} className='max-w-6xl w-full '>
-                <Button ><Link href='/issues/posts/'> Back </Link></Button>
+                <div className="flex items-center">
+                    <Button ><Link href='/issues/posts/'> Back </Link></Button>
+                    <h1 className='text-2xl font-bold mt-3 ml-3 border-b'>Edit document</h1>
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField.Root className="mt-3">
                         <TextField.Input defaultValue={issue.title} {...register('title')} />

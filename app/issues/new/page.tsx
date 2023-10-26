@@ -50,7 +50,10 @@ const NewIssuePage = () => {
           </Callout.Root>
         )}
       <div className="max-w-6xl w-full">
-        <Button><Link href='/issues'> Back </Link></Button>
+        <div className="flex items-center">
+          <Button><Link href='/issues'> Back </Link></Button>
+          <h1 className="text-2xl font-bold mt-3 ml-3 border-b">Create new document</h1>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)} >
           <TextField.Root className="mt-3">
             <TextField.Input placeholder="Title" {...register('title')} />
