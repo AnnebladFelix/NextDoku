@@ -46,22 +46,21 @@ export default function DisplayDocument() {
   return (
     <div>
        <h1 className='text-2xl font-bold underline'>ALL DOCUMENTS</h1>
-    <div className='space-y-4'>
-        {issues.slice().reverse().map((issue, index) => (
-            <div key={issue.id}>
-                <p 
-                    className='text-2xl font-bold'> 
-                    {issue.title}
-                </p>
-                <Button onClick={() => toggleDisplayDiscription(index)}>
-                    {displayDescription  === index ? 'Hide document' : 'Preview document'}
-                </Button>
-                {displayDescription === index && (
-                <p dangerouslySetInnerHTML={{ __html: issue.description }}></p>
-                )}
-            </div>
-        ))}
+        <div className='space-y-4'>
+            {issues.slice().reverse().map((issue, index) => (
+                <div key={issue.id}>
+                    <p className='text-2xl font-bold'> 
+                        {issue.title}
+                    </p>
+                    <Button onClick={() => toggleDisplayDiscription(index)}>
+                        {displayDescription  === index ? 'Hide document' : 'Preview document'}
+                    </Button>
+                    {displayDescription === index && (
+                    <p dangerouslySetInnerHTML={{ __html: issue.description }}></p>
+                    )}
+                </div>
+            ))}
+        </div>
     </div>
-</div>
 );
 }
