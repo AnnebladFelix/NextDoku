@@ -4,9 +4,12 @@ import Link from 'next/link'
 
 export default function issuesPage() {
   return (
-    <div>
-        <Button><Link href='/issues/new'> Add new Issue </Link></Button>
-        <Button><Link href='/issues/posts'> Edit Issues </Link></Button>
-    </div>
+    <>
+    
+      <div>
+          <Button><Link href='/issues/new'> Add document </Link></Button>
+          <Button><Link href='/issues/posts'> Edit document </Link></Button>
+      </div>
+    </>
   )
 }
