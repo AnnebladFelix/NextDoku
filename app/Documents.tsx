@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Spinner } from '@/app/components/Spinner';
 import {z} from 'zod';
 import { getIssueSchema } from '@/app/validationSchemas';
-import { Callout } from '@radix-ui/themes'
+import { Callout, Dialog, Flex } from '@radix-ui/themes'
 import { useRouter } from 'next/navigation';
 import { Button } from '@radix-ui/themes'
 
@@ -46,6 +46,7 @@ export default function Documents() {
         }
     }
 
+
     if (loading) {
         return <Spinner />; 
     }
@@ -68,7 +69,29 @@ export default function Documents() {
                         onClick={(e) => handleEdit(issue)}> 
                         {issue.title}
                         </button>
-                        <Button ml="3" color="red" onClick={(e) => handleDelete(issue)}>Delete</Button>
+                        <Dialog.Root>
+                            <Dialog.Trigger>
+                                <Button ml="3" color="red">Delete</Button>
+                            </Dialog.Trigger>
+
+                            <Dialog.Content style={{ maxWidth: 450 }}>
+                                <Dialog.Title>Do you really want to delete {issue.title}?</Dialog.Title>
+                                <Dialog.Description size="2" mb="4">
+                                    You cant undo this efter document is deleted.
+                                </Dialog.Description>
+
+                                <Flex gap="3" mt="4" justify="end">
+                                <Dialog.Close>
+                                    <Button variant="soft" color="gray">
+                                    Cancel
+                                    </Button>
+                                </Dialog.Close>
+                                <Dialog.Close>
+                                    <Button ml="3" color="red" onClick={(e) => handleDelete(issue)}>Delete</Button>
+                                </Dialog.Close>
+                                </Flex>
+                            </Dialog.Content>
+                        </Dialog.Root>
                     </div>
                 ))}
             </div>
