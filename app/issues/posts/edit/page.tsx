@@ -112,7 +112,7 @@ const GetOneIssuePage = () => {
                     <ErrorMessage>{errors.description?.message}</ErrorMessage>
                     <div className='mt-3'>
                         <Button mr="3" disabled={loading}>
-                            ADD {loading && <Spinner />}
+                            Edit {loading && <Spinner />}
                         </Button>
                         <Button ><Link href='/issues/posts/'> Cancel </Link></Button>
                     </div>
