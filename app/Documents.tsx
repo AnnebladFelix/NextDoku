@@ -61,7 +61,7 @@ export default function Documents() {
     return (
         <div>
             <div className='space-y-4'>
-                {issues.map((issue) => (
+                {issues.slice().reverse().map((issue) => (
                     <div className='flex justify-between border-b p-1' key={issue.id}>
                         <button 
                         className='text-2xl font-bold' 
