@@ -62,13 +62,13 @@ export default function Documents() {
         <div>
             <div className='space-y-4'>
                 {issues.map((issue) => (
-                    <div key={issue.id}>
+                    <div className='flex justify-between border-b p-1' key={issue.id}>
                         <button 
                         className='text-2xl font-bold' 
                         onClick={(e) => handleEdit(issue)}> 
                         {issue.title}
                         </button>
-                        <Button color="red" onClick={(e) => handleDelete(issue)}>Delete</Button>
+                        <Button ml="3" color="red" onClick={(e) => handleDelete(issue)}>Delete</Button>
                     </div>
                 ))}
             </div>

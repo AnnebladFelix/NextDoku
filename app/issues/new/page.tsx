@@ -43,16 +43,19 @@ const NewIssuePage = () => {
   };
 
   return (
-    <div>
-      <Button><Link href='/issues'> Back </Link></Button>
-      <div className="space-y-4">
+    <div className='flex justify-center'>
         {error && (
           <Callout.Root color="red" className="mb-5">
             <Callout.Text>{error}</Callout.Text>
           </Callout.Root>
         )}
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField.Root className="mt-5">
+      <div className="max-w-6xl w-full">
+        <div className="flex items-center">
+          <Button><Link href='/issues'> Back </Link></Button>
+          <h1 className="text-2xl font-bold mt-3 ml-3 border-b">Create new document</h1>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)} >
+          <TextField.Root className="mt-3">
             <TextField.Input placeholder="Title" {...register('title')} />
           </TextField.Root>
           <ErrorMessage>{errors.title?.message}</ErrorMessage>
@@ -68,12 +71,20 @@ const NewIssuePage = () => {
               onEditorChange={(content) => {
                   field.onChange(content);
                   handleEditorChange(content);
+              }}
+              init={{
+                height: 600,
+                plugins: " preview mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",
+                toolbar: "preview undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat"
               }}/>
           )}/>
           <ErrorMessage>{errors.description?.message}</ErrorMessage>
-          <Button disabled={loading}>
-            ADD {loading && <Spinner />}
-          </Button>
+          <div className="mt-3">
+            <Button mr="3" disabled={loading}>
+              ADD {loading && <Spinner />}
+            </Button>
+            <Button><Link href='/issues'> Cancel </Link></Button>
+          </div>
         </form>
       </div>
     </div>
