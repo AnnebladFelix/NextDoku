@@ -38,6 +38,7 @@ DATABASE_URL="mysql://(your username, often "root" with mysql):(YourSecretPasswo
 and: 
 
 TINY_KEY="Your tinyMCE api key"
+
 which you can get from their website here: [TinyMCE.](https://www.tiny.cloud/blog/how-to-get-tinymce-cloud-up-in-less-than-5-minutes/)
 
 ### Set up your MySQL server
