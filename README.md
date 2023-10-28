@@ -30,9 +30,11 @@ Created using nextjs 13 and prisma with mySQL.
 ### Add .env
 
 Add .env file to the root folder.
+
 Add:  
 
 DATABASE_URL="mysql://(your username, often "root" with mysql):(YourSecretPassword)@localhost:3306/(Your db name)"
+
 and: 
 
 TINY_KEY="Your tinyMCE api key"
