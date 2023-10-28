@@ -29,7 +29,7 @@ Created using nextjs 13 and prisma with mySQL.
 
 ### Add .env
 
-Add .env file to the root folder.
+Create a .env file to the root folder.
 
 Add:  
 
