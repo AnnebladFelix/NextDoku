@@ -64,22 +64,27 @@ export default function Documents() {
             <div className='space-y-4'>
                 {issues.slice().reverse().map((issue) => (
                     <div className='flex justify-between border-b p-1' key={issue.id}>
-                        <button 
-                        className='text-2xl font-bold' 
-                        onClick={(e) => handleEdit(issue)}> 
-                        {issue.title}
-                        </button>
+                        <div>
+                            <Button mr="3" 
+                            className='text-2xl font-bold cursor-pointer' 
+                            onClick={(e) => handleEdit(issue)}> 
+                            Edit
+                            </Button>
+                            <button 
+                            className='text-2xl font-bold cursor-pointer' 
+                            onClick={(e) => handleEdit(issue)}> 
+                            {issue.title}
+                            </button>
+                        </div>
                         <Dialog.Root>
                             <Dialog.Trigger>
                                 <Button ml="3" color="red">Delete</Button>
                             </Dialog.Trigger>
-
                             <Dialog.Content style={{ maxWidth: 450 }}>
                                 <Dialog.Title>Do you really want to delete {issue.title}?</Dialog.Title>
                                 <Dialog.Description size="2" mb="4">
                                     You cant undo this efter document is deleted.
                                 </Dialog.Description>
-
                                 <Flex gap="3" mt="4" justify="end">
                                 <Dialog.Close>
                                     <Button variant="soft" color="gray">
