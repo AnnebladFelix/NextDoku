@@ -77,7 +77,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - Tailwind
 - radix-ui
 - classnames
-- react-icons
 - Prisma
 - Zod
 - TinyMCE
